@@ -63,7 +63,17 @@ html, body {
     border-radius: 20px;
     border: none;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    overflow: hidden;
 }
+
+.card-header {
+    border-radius: 20px 20px 0 0;
+}
+
+#searchInput {
+        border-radius: 25px;
+        padding-left: 20px;
+    }
 
 form {
     display: flex;

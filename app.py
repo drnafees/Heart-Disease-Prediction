@@ -1,10 +1,19 @@
-from flask import Flask, redirect, render_template, request, url_for
+import os
+from dotenv import load_dotenv
+from flask import Flask, redirect, render_template, request, url_for, jsonify
+from flask_migrate import Migrate
+from database.models import db, Patient
 import pandas as pd
 import joblib
 import tensorflow as tf
 from functools import wraps
 
+load_dotenv()
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
+migrate = Migrate(app, db)
 session_token = None
 
 try:
@@ -114,10 +123,36 @@ def logout():
     session_token = None
     return redirect(url_for('login'))
 
-@app.route('/patients')
+@app.route('/patients', methods=['GET', 'POST'])
 @login_required
 def patients():
-    return render_template("patients.html")
+    if request.method == 'POST':
+        data=request.json
+        new_patient = Patient(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+            date_of_birth=data['date_of_birth'],
+            medical_history=data.get('medical_history', {})
+        )
+        db.session.add(new_patient)
+        db.session.commit()
+        print(f"Added new patient: {new_patient}")
+
+    patients = Patient.query.all()
+    output = []
+    patient_data = {}
+    for patient in patients:
+        patient_data = {
+            "mr": patient.mr,
+            "first_name": patient.first_name,
+            "last_name": patient.last_name,
+            "date_of_birth": patient.date_of_birth.isoformat(),
+            "medical_history": patient.medical_history,
+            "created_at": patient.created_at.isoformat()
+        }
+    output.append(patient_data)
+
+    return render_template("patients.html", patients=output)
 
 @app.route('/about')
 def about():
