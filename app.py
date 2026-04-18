@@ -76,4 +76,5 @@ def index():
     return render_template("index.html", results=results, input_data=input_data)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
+    app.config['TEMPLATES_AUTO_RELOAD'] = True

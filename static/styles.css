@@ -1,7 +1,14 @@
 :root {
     --primary-gradient: linear-gradient(135deg, #e53935 0%, #b71c1c 100%);
     --primary-color: #e53935;
+    --text-primary: #212529;
     --bg-color: #f0f2f5;
+
+    --bs-primary: var(--primary-color);
+    --bs-primary-rgb: 229, 57, 53;
+    
+    --bs-body-bg: var(--bg-color);
+    --bs-body-color: var(--text-primary);
 }
 
 html, body {
@@ -30,6 +37,18 @@ html, body {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     margin: 0;
+}
+
+.bg-primary-gradient {
+    background: var(--primary-gradient) !important;
+}
+
+.nav-pills .nav-link.active {
+    background-color: var(--primary-color) !important;
+}
+
+.header-compact {
+    background-color: var(--bg-primary);
 }
 
 .content-area {
