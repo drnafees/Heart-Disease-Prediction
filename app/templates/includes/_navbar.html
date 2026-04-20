@@ -8,11 +8,11 @@
 {% endmacro %}
 
 <ul class="nav nav-pills bg-light border rounded-pill p-1 shadow-sm flex-nowrap">
-    {{ nav_link('index', 'bi-house-door', 'Home') }}
-    {{ nav_link('patients', 'bi-people', 'Patients') }}
-    {{ nav_link('about', 'bi-info-circle', 'About') }}
-    
+    {{ nav_link('main.index', 'bi-house-door', 'Home') }}
+    {{ nav_link('main.patients', 'bi-people', 'Patients') }}
+    {{ nav_link('main.about', 'bi-info-circle', 'About') }}
+
     <div class="vr mx-2 my-2 text-secondary opacity-25"></div>
     
-    {{ nav_link('logout', 'bi-box-arrow-right', 'Logout', 'text-danger fw-bold') }}
+    {{ nav_link('auth.logout', 'bi-box-arrow-right', 'Logout', 'text-danger fw-bold') }}
 </ul>

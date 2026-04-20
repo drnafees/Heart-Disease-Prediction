@@ -10,7 +10,7 @@
                 {{ error }}
             </div>
         {% endif %}
-        <form method="POST" action="{{ url_for('login') }}">
+        <form method="POST" action="{{ url_for('auth.login') }}">
             <div class="mb-3">
                 <label for="email">User ID <span class="text-muted">(default: test@domain.com)</span></label>
                 <input type="email" class="form-control" name="email" required>

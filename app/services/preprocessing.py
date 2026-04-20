@@ -1,4 +1,3 @@
-#%%
 import numpy as np
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.impute import SimpleImputer
@@ -29,4 +28,3 @@ def create_preprocessor(df):
     ])
 
     return preprocessor, X
-#%%
