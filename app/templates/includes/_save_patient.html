@@ -1,0 +1,135 @@
+<div
+    class="modal fade"
+    id="savePatientModal"
+    tabindex="-1"
+    aria-labelledby="savePatientModalLabel"
+    aria-hidden="true"
+>
+    <div
+        class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+    >
+        <form
+            method="POST"
+            action="{{ url_for('main.patients') }}"
+            class="w-100"
+        >
+            <div class="modal-content custom-modal">
+                <div class="modal-header border-0 pb-0">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-box-red me-3">
+                            <i class="bi bi-person"></i>
+                        </div>
+                        <h5 class="modal-title fw-bold">Save Patient Data</h5>
+                    </div>
+                    <button
+                        type="button"
+                        class="btn-close shadow-none"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                </div>
+
+                <div class="modal-body pt-4">
+                    <div class="d-flex flex-column gap-2">
+                        <div class="input-cell">
+                            <label
+                                class="form-label text-muted text-uppercase fw-bold"
+                                >MR number</label
+                            >
+                            <input
+                                type="number"
+                                class="form-control form-control-sm border-0 bg-transparent p-0"
+                                name="mr_number"
+                                required
+                            />
+                        </div>
+                        <div class="input-cell">
+                            <label
+                                class="form-label text-muted text-uppercase fw-bold"
+                                >First name</label
+                            >
+                            <input
+                                type="text"
+                                class="form-control form-control-sm border-0 bg-transparent p-0"
+                                name="first_name"
+                                required
+                            />
+                        </div>
+                        <div class="input-cell">
+                            <label
+                                class="form-label text-muted text-uppercase fw-bold"
+                                >Last name</label
+                            >
+                            <input
+                                type="text"
+                                class="form-control form-control-sm border-0 bg-transparent p-0"
+                                name="last_name"
+                                required
+                            />
+                        </div>
+                        <div class="input-cell">
+                            <label
+                                class="form-label text-muted text-uppercase fw-bold d-block mb-2"
+                                >Gender</label
+                            >
+
+                            <div class="d-flex gap-3">
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="gender"
+                                        id="genderMale"
+                                        value="1"
+                                        required
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        for="genderMale"
+                                        >Male</label
+                                    >
+                                </div>
+
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="gender"
+                                        id="genderFemale"
+                                        value="0"
+                                        required
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        for="genderFemale"
+                                        >Female</label
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-cell">
+                            <label
+                                class="form-label text-muted text-uppercase fw-bold"
+                                >Date of birth</label
+                            >
+                            <input
+                                type="date"
+                                class="form-control form-control-sm border-0 bg-transparent p-0"
+                                name="dob"
+                                required
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button
+                        type="submit"
+                        class="btn btn-danger w-100 rounded-pill py-2 fw-bold"
+                    >
+                        Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

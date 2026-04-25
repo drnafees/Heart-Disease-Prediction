@@ -6,15 +6,16 @@
 
     --bs-primary: var(--primary-color);
     --bs-primary-rgb: 229, 57, 53;
-    
+
     --bs-body-bg: var(--bg-color);
     --bs-body-color: var(--text-primary);
 }
 
-html, body {
+html,
+body {
     height: 100vh;
     margin: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     background-color: var(--bg-color);
 }
 
@@ -23,6 +24,11 @@ html, body {
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
+}
+
+.content-area {
+    flex: 1;
+    min-height: 0;
 }
 
 .header-compact {
@@ -51,29 +57,33 @@ html, body {
     background-color: var(--bg-primary);
 }
 
-.content-area {
-    flex: 1;
-    min-height: 0;
-}
-
 .card {
     height: 100%;
     display: flex;
     flex-direction: column;
-    border-radius: 20px;
-    border: none;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    background-color: #f8f9fa;
+
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 24px;
+
     overflow: hidden;
 }
 
 .card-header {
-    border-radius: 20px 20px 0 0;
+    background-color: #ffffff;
+    border-bottom: 1px solid #f1f5f9;
+    padding: 1.25rem 1.5rem;
+    border-radius: 24px 24px 0 0;
+}
+
+.card-body {
+    padding: 1.5rem;
 }
 
 #searchInput {
-        border-radius: 25px;
-        padding-left: 20px;
-    }
+    border-radius: 25px;
+    padding-left: 20px;
+}
 
 form {
     display: flex;
@@ -90,7 +100,7 @@ form {
 }
 
 .input-cell {
-    background: #f8f9fa;
+    background: #fff;
     border: 1px solid #eef0f2;
     border-radius: 12px;
     padding: 8px 12px;
@@ -121,8 +131,8 @@ form {
 }
 
 .modal-backdrop {
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
 }
 
 .custom-modal {
@@ -136,7 +146,7 @@ form {
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: #b71c1c; /* Using your Heart Red */
+    color: #b71c1c;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -151,20 +161,6 @@ form {
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
-}
-
-.custom-table thead th {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    color: #9ca3af;
-    border-bottom: 1px solid #f3f4f6;
-    padding-bottom: 10px;
-}
-
-.custom-table tbody td {
-    padding: 12px 8px;
-    border-bottom: 1px solid #f9fafb;
-    font-size: 0.85rem;
 }
 
 .badge-range {
@@ -192,4 +188,8 @@ form {
 
 .login-container {
     min-height: 80vh;
+}
+
+table {
+    background-color: white;
 }

@@ -1,24 +1,35 @@
-{% extends "base.html" %}
-
-{% block content %}
-    <div class="row h-100 g-3">
-        
-        <div class="{{ 'col-lg-8' if results else 'col-lg-12' }} h-100">
-            <div class="card p-3">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="fw-bold">Clinical Parameters</h5>
-                    <button type="button" class="btn btn-outline-secondary shadow-sm rounded-pill px-4" 
-                            data-bs-toggle="modal" data-bs-target="#infoModal">
+{% extends "base.html" %} {% block content %}
+<div class="row h-100 g-3">
+    <div class="{{ 'col-lg-8' if results else 'col-lg-12' }} h-100">
+        <div class="card p-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold">Clinical Parameters</h5>
+                <div>
+                    <button
+                        type="button"
+                        class="btn btn-outline-secondary shadow-sm rounded-pill px-4"
+                        data-bs-toggle="modal"
+                        data-bs-target="#infoModal"
+                    >
                         Documentation
                     </button>
+                    {% if results %}
+                    <button
+                        type="button"
+                        class="btn btn-outline-secondary shadow-sm rounded-pill px-4"
+                        data-bs-toggle="modal"
+                        data-bs-target="#savePatientModal"
+                    >
+                        Save Record
+                    </button>
+                    {% endif %}
                 </div>
-                {% include "includes/_patient_data_input.html" %}
             </div>
+            {% include "includes/_patient_data_input.html" %}
         </div>
-
-        {% if results %}
-            {% include "includes/_risk_card.html" %}
-        {% endif %}
     </div>
-    {% include "includes/_documentation.html" %}
-{% endblock %}
+    {% if results %}
+    <div class="col-lg-4 h-100">{% include "includes/_risk_card.html" %}</div>
+    {% endif %}
+</div>
+{% include "includes/_documentation.html" %} {% endblock %}

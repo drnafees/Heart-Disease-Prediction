@@ -1,10 +1,12 @@
-from flask import Blueprint, render_template, request, jsonify
-from app.services.ai_service import AIService
-from database.models import db, Patient
-from app.blueprints.auth.utils import login_required
+from flask import Blueprint, render_template, request, session
 
-main_bp = Blueprint('main', __name__)
+from app.blueprints.auth.utils import login_required
+from app.services.ai_service import AIService
+from database.models import Patient, db
+
+main_bp = Blueprint("main", __name__)
 ai_service = AIService()
+
 
 @main_bp.route("/", methods=["GET", "POST"])
 @login_required
@@ -25,24 +27,30 @@ def index():
             "oldpeak": float(request.form["oldpeak"]),
             "slope": int(request.form["slope"]),
             "ca": int(request.form["ca"]),
-            "thal": int(request.form["thal"])
+            "thal": int(request.form["thal"]),
         }
 
         results = ai_service.get_predictions(input_data)
+        session["results"] = results
+        session["input_data"] = input_data
 
     return render_template("index.html", results=results, input_data=input_data)
 
 
-@main_bp.route('/patients', methods=['GET', 'POST'])
+@main_bp.route("/patients", methods=["GET", "POST"])
 @login_required
 def patients():
-    if request.method == 'POST':
-        data=request.json
+    if request.method == "POST":
         new_patient = Patient(
-            first_name=data['first_name'],
-            last_name=data['last_name'],
-            date_of_birth=data['date_of_birth'],
-            medical_history=data.get('medical_history', {})
+            mr=request.form["mr_number"],
+            first_name=request.form["first_name"],
+            last_name=request.form["last_name"],
+            date_of_birth=request.form["dob"],
+            gender=request.form["gender"],
+            medical_history={
+                "history": session["input_data"],
+                "result": session["results"],
+            },
         )
         db.session.add(new_patient)
         db.session.commit()
@@ -58,12 +66,24 @@ def patients():
             "last_name": patient.last_name,
             "date_of_birth": patient.date_of_birth.isoformat(),
             "medical_history": patient.medical_history,
-            "created_at": patient.created_at.isoformat()
+            "created_at": patient.created_at.isoformat(),
         }
-    output.append(patient_data)
+        output.append(patient_data)
 
     return render_template("patients.html", patients=output)
 
-@main_bp.route('/about')
+
+@main_bp.route("/patient/<mr>", methods=["GET"])
+@login_required
+def patient_detail(mr):
+    patient = Patient.query.get_or_404(mr)
+    return render_template(
+        "patient_detail.html",
+        patient=patient,
+        results=patient.medical_history["result"],
+    )
+
+
+@main_bp.route("/about")
 def about():
     return render_template("about.html")
