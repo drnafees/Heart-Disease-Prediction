@@ -1,1 +1,95 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block title %}Project Documentation{% endblock %}
+{% block content %}
+<div class="container py-4">
+    <div class="card border-0 rounded-4">
+        <div class="card-body pt-4">
+            <section class="mb-4">
+                <h6 class="modal-section-title">Clinical Parameter Guide</h6>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle custom-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Medical Description</th>
+                                <th class="text-end">Valid Range</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in [ ('Age', 'Patient age in years', '20
+                            - 100'), ('Sex', '0: Female, 1: Male', 'Binary'),
+                            ('Chest Pain', 'Type of pain (0-3 scale)', '0 - 3'),
+                            ('Resting BP', 'BP in mm Hg on admission', '80 -
+                            200'), ('Cholesterol', 'Serum cholesterol in mg/dl',
+                            '100 - 600'), ('Fasting Sugar', 'FBS > 120 mg/dl
+                            (1=True)', 'Binary'), ('Rest ECG', 'ECG results (0-2
+                            scale)', '0 - 2'), ('Max HR', 'Max heart rate
+                            achieved', '60 - 220'), ('Ex. Angina', 'Exercise
+                            induced angina', 'Binary'), ('Oldpeak', 'ST
+                            depression (exercise/rest)', '0.0 - 6.0'), ('ST
+                            Slope', 'Peak exercise ST segment', '0 - 2'),
+                            ('Vessels', 'Major vessels via fluoroscopy', '0 -
+                            3'), ('Thal', '1: Normal, 2: Fixed, 3: Reversible',
+                            '1 - 3') ] %}
+                            <tr>
+                                <td class="fw-bold">{{ item[0] }}</td>
+                                <td class="text-muted small">{{ item[1] }}</td>
+                                <td class="text-end">
+                                    <span class="badge badge-range"
+                                        >{{ item[2] }}</span
+                                    >
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <section class="info-card h-100">
+                        <h6 class="modal-section-title">Training Dataset</h6>
+                        <p class="small text-muted mb-3">
+                            Trained on the
+                            <strong>UCI Heart Disease Dataset</strong>,
+                            aggregating clinical records from Cleveland,
+                            Hungary, Switzerland, and Long Beach.
+                        </p>
+                        <a
+                            href="https://archive.ics.uci.edu/dataset/45/heart+disease"
+                            target="_blank"
+                            class="btn btn-sm btn-outline-danger w-100 rounded-pill"
+                        >
+                            External UCI Link 🔗
+                        </a>
+                    </section>
+                </div>
+
+                <div class="col-md-6">
+                    <section class="info-card h-100">
+                        <h6 class="modal-section-title">About</h6>
+                        <ul class="list-unstyled small text-muted mb-0">
+                            <li><strong>Models:</strong> ANN, RF, LogReg</li>
+                            <li>
+                                <strong>Engine:</strong> TensorFlow,
+                                Scikit-Learn
+                            </li>
+                            <li><strong>BS CompSci FYP 2026</strong></li>
+                            <li>
+                                <strong>By </strong>
+                                <a
+                                    href="https://www.linkedin.com/in/drnafees"
+                                    target="_blank"
+                                >
+                                    M. Ahmed Nafees
+                                </a>
+                            </li>
+                            <li><strong>Version:</strong> 0.2</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
