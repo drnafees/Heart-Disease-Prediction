@@ -41,9 +41,9 @@ A clinical decision support tool designed for healthcare professionals. By lever
     SECRET_KEY=your_secret_key DATABASE_URL=your_database_connection_string
     ```
   * Run the database migration script to create necessary tables:
-   ```bash
-   flask db upgrade
-   ```
+    ```bash
+      flask db upgrade
+    ```
 4. **Run the application:**
    ```bash
    python app.py
