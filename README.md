@@ -48,7 +48,7 @@ A clinical decision support tool designed for healthcare professionals. By lever
    ```bash
    python app.py
    ```
-  This will automatically train the models if not present and you can access the web interface at `http://localhost:5000` where you can input patient data and receive risk assessments.
+     This will automatically train the models if not present and you can access the web interface at `http://localhost:5000` where you can input patient data and receive risk assessments.
 ---
 
 ## 📄 License
