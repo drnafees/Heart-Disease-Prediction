@@ -21,7 +21,7 @@ A clinical decision support tool designed for healthcare professionals. By lever
 ## 🛠️ Installation & Setup
 
 ### Prerequisites
-* Python 3.8 or higher
+* Python 3.8 - 3.11
 * Pip (Python Package Manager)
 
 ### Steps
