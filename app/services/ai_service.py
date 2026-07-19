@@ -4,7 +4,7 @@ import tensorflow as tf
 import pandas as pd
 from config import Config
 
-class AIService:
+class PredictionEngine:
     model_path = Config.MODEL_PATH
 
     def __init__(self):
@@ -20,7 +20,7 @@ class AIService:
             self.lr_pipeline = joblib.load(f"{self.model_path}/lr_pipeline.pkl")
             self.rf_pipeline = joblib.load(f"{self.model_path}/rf_pipeline.pkl")
         except Exception as e:
-            print(f"Error loading models: {e}. AI Service will not function properly.")
+            print(f"Error loading models: {e}. Prediction Engine will not function properly.")
             self.ann_model = self.lr_pipeline = self.rf_pipeline = None
 
     def map_risk(self, prob):

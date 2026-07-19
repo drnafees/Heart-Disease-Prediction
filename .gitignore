@@ -1,8 +1,127 @@
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-.env
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+build/
+dist/
+sdist/
+wheels/
+*.egg-info/
+*.egg
+.eggs/
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ---------------------------------------------------------------------------
+# Virtual environments
+# ---------------------------------------------------------------------------
+tf-env/
 .venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+pyvenv.cfg
+
+# ---------------------------------------------------------------------------
+# Environment variables / secrets
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ---------------------------------------------------------------------------
+# Flask / Database
+# ---------------------------------------------------------------------------
+instance/
+*.sqlite
+*.sqlite3
+*.db
+
+# ---------------------------------------------------------------------------
+# Machine Learning / TensorFlow
+# ---------------------------------------------------------------------------
+# TensorBoard logs
+logs/
+tensorboard/
+# Model checkpoints & training artifacts (trained models in models/ are kept)
+checkpoints/
+*.ckpt
+*.ckpt.*
+*.h5.tmp
+# Uncomment the lines below if you don't want to track trained models:
+# models/*.keras
+# models/*.pkl
+# models/*.h5
+
+# ---------------------------------------------------------------------------
+# Jupyter Notebook
+# ---------------------------------------------------------------------------
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+# ---------------------------------------------------------------------------
+# Testing / Coverage / Linting
+# ---------------------------------------------------------------------------
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.cache/
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+dmypy.json
+
+# ---------------------------------------------------------------------------
+# IDEs and Editors
+# ---------------------------------------------------------------------------
 .idea/
 *.iml
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# ---------------------------------------------------------------------------
+# Operating System files
+# ---------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ---------------------------------------------------------------------------
+# Logs
+# ---------------------------------------------------------------------------
+*.log
+*.log.*
+
+# ---------------------------------------------------------------------------
+# Microsoft Office files (Documents/ folder)
+# ---------------------------------------------------------------------------
+*.docx
+*.doc
+*.pptx
+*.ppt
+*.xlsx
+*.tmp

@@ -1,11 +1,13 @@
 from flask import Blueprint, render_template, request, session
 
 from app.blueprints.auth.utils import login_required
-from app.services.ai_service import AIService
-from database.models import Patient, db
+from app.services.ai_service import PredictionEngine
+from database.models import Patient as PatientModel, db
+
+from app.patient import Patient, MedicalHistory
 
 main_bp = Blueprint("main", __name__)
-ai_service = AIService()
+prediction_engine = PredictionEngine()
 
 
 @main_bp.route("/", methods=["GET", "POST"])
@@ -30,7 +32,7 @@ def index():
             "thal": int(request.form["thal"]),
         }
 
-        results = ai_service.get_predictions(input_data)
+        results = prediction_engine.get_predictions(input_data)
         session["results"] = results
         session["input_data"] = input_data
 
@@ -41,33 +43,41 @@ def index():
 @login_required
 def patients():
     if request.method == "POST":
-        new_patient = Patient(
+        history_dict = {
+            "input_data": session.get("input_data", {}),
+            "prediction": {"results": session.get("results")}
+        }
+        
+        new_patient = PatientModel(
             mr=request.form["mr_number"],
             first_name=request.form["first_name"],
             last_name=request.form["last_name"],
             date_of_birth=request.form["dob"],
             gender=request.form["gender"],
-            medical_history={
-                "history": session["input_data"],
-                "result": session["results"],
-            },
+            medical_history=history_dict
         )
         db.session.add(new_patient)
         db.session.commit()
-        print(f"Added new patient: {new_patient}")
+        print(f"Added new patient with medical records: {new_patient}")
 
-    patients = Patient.query.all()
+    # --- GET / Render Pipeline ---
+    patients = PatientModel.query.all()
     output = []
-    patient_data = {}
+    
     for patient in patients:
-        patient_data = {
-            "mr": patient.mr,
-            "first_name": patient.first_name,
-            "last_name": patient.last_name,
-            "date_of_birth": patient.date_of_birth.isoformat(),
-            "medical_history": patient.medical_history,
-            "created_at": patient.created_at.isoformat(),
-        }
+
+        history_json = patient.medical_history or {}
+        patient_data = Patient(
+            mr=patient.mr,
+            first_name=patient.first_name,
+            last_name=patient.last_name,
+            date_of_birth=patient.date_of_birth,
+            gender=patient.gender,
+            medical_history=MedicalHistory(
+                inputdata=history_json.get("input_data", {}),
+                results=history_json.get("prediction", {}).get("results", None)
+            )
+        )
         output.append(patient_data)
 
     return render_template("patients.html", patients=output)
@@ -76,11 +86,12 @@ def patients():
 @main_bp.route("/patient/<mr>", methods=["GET"])
 @login_required
 def patient_detail(mr):
-    patient = Patient.query.get_or_404(mr)
+    patient = PatientModel.query.get_or_404(mr)
+    history_json = patient.medical_history or {}
     return render_template(
         "patient_detail.html",
         patient=patient,
-        results=patient.medical_history["result"],
+        results=history_json.get("prediction", {}).get("results", None),
     )
 
 
